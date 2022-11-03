@@ -9,14 +9,24 @@ const InfinityList = props => {
     const perLoad = 6 // items each load
 
     const listRef = useRef(null)
-    
-    const [data, setData] = useState([])
+
+    const [data, setData] = useState(props.data)
+
+    // const loadProduct = useCallback(()=>{
+    //     BooksService.getAllBooks()
+    //         .then((response)=>{
+    //             console.log(response.data);
+    //             setProducts(response.data);
+    //         })
+    // })
+
 
     const [load, setLoad] = useState(true)
 
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
+        // console.log(props.data);
         setData(props.data.slice(0, perLoad))
         setIndex(1)
     }, [props.data])
@@ -29,7 +39,7 @@ const InfinityList = props => {
                     setLoad(true)
                 }
             }
-            
+
         })
     }, [listRef])
 
@@ -56,17 +66,17 @@ const InfinityList = props => {
                 col={3}
                 mdCol={2}
                 smCol={1}
-                gap={20}
-            >
+                gap={20}>
                 {
                     data.map((item, index) => (
                         <ProductCard
+                            product={item}
                             key={index}
-                            img01={item.image01}
-                            img02={item.image02}
-                            name={item.title}
-                            price={Number(item.price)}
-                            slug={item.slug}
+                            // img01={item.image01}
+                            // img02={item.imageLink}
+                            // name={item.title}
+                            // price={Number(item.price)}
+                            slug='hehe'
                         />
                     ))
                 }

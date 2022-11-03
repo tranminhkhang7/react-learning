@@ -28,8 +28,9 @@ const login = (username, password) => {
     .post(API_URL + "/login", params)
     .then((response) => {
       // console.log("hello");
-      console.log(response.data.accessToken);
-      if (response.data.accessToken) {
+      // console.log(response.data.access_token);
+      console.log(response);
+      if (response.data.access_token) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 

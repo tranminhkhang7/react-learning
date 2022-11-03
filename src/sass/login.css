@@ -1,0 +1,81 @@
+.App {
+  background-color: white;
+}
+
+.Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 100vw; */
+  height: 60vh;
+}
+
+.Auth-form {
+  width: 420px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.Auth-form-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Auth-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+.Auth-form-input {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.Auth-form-button {
+  position: relative;
+  justify-content: center;
+
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 16px; */
+  margin: 15px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 2px;
+
+  background-color: white;
+  color: black;
+  border: 1px solid #555555;
+}
+
+.Auth-form-button:hover {
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 16px; */
+  margin: 15px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 2px;
+
+  background-color: #000000;
+  color: white;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}

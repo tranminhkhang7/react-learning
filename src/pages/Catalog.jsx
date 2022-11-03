@@ -9,48 +9,65 @@ import colors from '../assets/fake-data/product-color'
 import size from '../assets/fake-data/product-size'
 import Button from '../components/Button'
 import InfinityList from '../components/InfinityList'
+import BooksService from '../services/books.service'
+
 
 const Catalog = () => {
-
+    
     const initFilter = {
         category: [],
         color: [],
         size: []
     }
 
-    const productList = productData.getAllProducts()
 
-    const [products, setProducts] = useState(productList)
+    const [products, setProducts] = useState([]);
+
+    const loadProduct = useCallback(()=>{
+        BooksService.getAllBooks()
+            .then((response)=>{
+                console.log(response.data);
+                setProducts(response.data);
+            })
+    })
+
+    useEffect(()=>{
+        loadProduct()
+    }, [])
+    // const productList = productData.getAllProducts()
+    // const [products, setProducts] = useState(productList);
 
     const [filter, setFilter] = useState(initFilter)
 
+
+
     const filterSelect = (type, checked, item) => {
         if (checked) {
-            switch(type) {
+            switch (type) {
                 case "CATEGORY":
-                    setFilter({...filter, category: [...filter.category, item.categorySlug]})
+                    setFilter({ ...filter, category: [...filter.category, item.categorySlug] })
                     break
                 case "COLOR":
-                    setFilter({...filter, color: [...filter.color, item.color]})
+                    setFilter({ ...filter, color: [...filter.color, item.color] })
                     break
                 case "SIZE":
-                    setFilter({...filter, size: [...filter.size, item.size]})
+                    setFilter({ ...filter, size: [...filter.size, item.size] })
                     break
                 default:
             }
         } else {
-            switch(type) {
+            switch (type) {
                 case "CATEGORY":
                     const newCategory = filter.category.filter(e => e !== item.categorySlug)
-                    setFilter({...filter, category: newCategory})
+                    setFilter({ ...filter, category: newCategory })
                     break
                 case "COLOR":
                     const newColor = filter.color.filter(e => e !== item.color)
-                    setFilter({...filter, color: newColor})
+                    setFilter({ ...filter, color: newColor })
                     break
                 case "SIZE":
                     const newSize = filter.size.filter(e => e !== item.size)
-                    setFilter({...filter, size: newSize})
+                    setFilter({ ...filter, size: newSize })
                     break
                 default:
             }
@@ -59,31 +76,31 @@ const Catalog = () => {
 
     const clearFilter = () => setFilter(initFilter)
 
-    const updateProducts = useCallback(
-        () => {
-            let temp = productList
+    const updateProducts = useCallback(() => {
+        // let temp = productList
+        let temp = products
 
-            if (filter.category.length > 0) {
-                temp = temp.filter(e => filter.category.includes(e.categorySlug))
-            }
+        if (filter.category.length > 0) {
+            temp = temp.filter(e => filter.category.includes(e.categorySlug))
+        }
 
-            if (filter.color.length > 0) {
-                temp = temp.filter(e => {
-                    const check = e.colors.find(color => filter.color.includes(color))
-                    return check !== undefined
-                })
-            }
+        if (filter.color.length > 0) {
+            temp = temp.filter(e => {
+                const check = e.colors.find(color => filter.color.includes(color))
+                return check !== undefined
+            })
+        }
 
-            if (filter.size.length > 0) {
-                temp = temp.filter(e => {
-                    const check = e.size.find(size => filter.size.includes(size))
-                    return check !== undefined
-                })
-            }
+        if (filter.size.length > 0) {
+            temp = temp.filter(e => {
+                const check = e.size.find(size => filter.size.includes(size))
+                return check !== undefined
+            })
+        }
 
-            setProducts(temp)
-        },
-        [filter, productList],
+        setProducts(temp)
+    },
+        [filter, products],
     )
 
     useEffect(() => {
@@ -97,7 +114,7 @@ const Catalog = () => {
     return (
         <Helmet title="Sản phẩm">
             <div className="catalog">
-                <div className="catalog__filter" ref={filterRef}>
+                {/* <div className="catalog__filter" ref={filterRef}>
                     <div className="catalog__filter__close" onClick={() => showHideFilter()}>
                         <i className="bx bx-left-arrow-alt"></i>
                     </div>
@@ -163,15 +180,21 @@ const Catalog = () => {
                             <Button size="sm" onClick={clearFilter}>xóa bộ lọc</Button>
                         </div>
                     </div>
-                </div>
-                <div className="catalog__filter__toggle">
+                </div>  */}
+
+
+                {/* <div className="catalog__filter__toggle">
                     <Button size="sm" onClick={() => showHideFilter()}>bộ lọc</Button>
-                </div>
+                </div> */}
+
+
                 <div className="catalog__content">
                     <InfinityList
                         data={products}
                     />
                 </div>
+
+
             </div>
         </Helmet>
     )
