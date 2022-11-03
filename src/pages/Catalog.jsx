@@ -15,7 +15,8 @@ import BooksService from '../services/books.service'
 const Catalog = () => {
     
     const initFilter = {
-        category: [],
+        category: []
+        ,
         color: [],
         size: []
     }
@@ -23,17 +24,22 @@ const Catalog = () => {
 
     const [products, setProducts] = useState([]);
 
-    const loadProduct = useCallback(()=>{
+    const loadProduct = useCallback(() => {
         BooksService.getAllBooks()
-            .then((response)=>{
+            .then(function (response) {
                 console.log(response.data);
                 setProducts(response.data);
             })
+            .catch(function (error) {
+                console.log(error.message);
+                return null;
+            });
     })
 
     useEffect(()=>{
         loadProduct()
     }, [])
+
     // const productList = productData.getAllProducts()
     // const [products, setProducts] = useState(productList);
 
@@ -114,13 +120,13 @@ const Catalog = () => {
     return (
         <Helmet title="Sản phẩm">
             <div className="catalog">
-                {/* <div className="catalog__filter" ref={filterRef}>
-                    <div className="catalog__filter__close" onClick={() => showHideFilter()}>
+                {/* <div className="catalog__filter" ref={filterRef}> */}
+                    {/* <div className="catalog__filter__close" onClick={() => showHideFilter()}>
                         <i className="bx bx-left-arrow-alt"></i>
-                    </div>
-                    <div className="catalog__filter__widget">
+                    </div> */}
+                    {/* <div className="catalog__filter__widget">
                         <div className="catalog__filter__widget__title">
-                            danh mục sản phẩm
+                            filter
                         </div>
                         <div className="catalog__filter__widget__content">
                             {
@@ -135,9 +141,9 @@ const Catalog = () => {
                                 ))
                             }
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="catalog__filter__widget">
+                    {/* <div className="catalog__filter__widget">
                         <div className="catalog__filter__widget__title">
                             màu sắc
                         </div>
@@ -154,9 +160,9 @@ const Catalog = () => {
                                 ))
                             }
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="catalog__filter__widget">
+                    {/* <div className="catalog__filter__widget">
                         <div className="catalog__filter__widget__title">
                             kích cỡ
                         </div>
@@ -173,19 +179,19 @@ const Catalog = () => {
                                 ))
                             }
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className="catalog__filter__widget">
+                    {/* <div className="catalog__filter__widget">
                         <div className="catalog__filter__widget__content">
-                            <Button size="sm" onClick={clearFilter}>xóa bộ lọc</Button>
+                            <Button size="sm" onClick={clearFilter}>clear filter</Button>
                         </div>
-                    </div>
-                </div>  */}
+                    </div> */}
+                {/* </div>  */}
 
 
-                {/* <div className="catalog__filter__toggle">
-                    <Button size="sm" onClick={() => showHideFilter()}>bộ lọc</Button>
-                </div> */}
+                <div className="catalog__filter__toggle">
+                    <Button size="sm" onClick={() => showHideFilter()}>filter</Button>
+                </div>
 
 
                 <div className="catalog__content">

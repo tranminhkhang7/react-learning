@@ -10,7 +10,6 @@ import { set } from '../redux/product-modal/productModalSlice'
 import Button from './Button'
 
 import numberWithCommas from '../utils/numberWithCommas'
-// import numberWithDollarSign from '../utils/numberWithDollarSign'
 
 const ProductCard = props => {
 
@@ -20,19 +19,20 @@ const ProductCard = props => {
 
     return (
         <div className="product-card">
-            <Link to={`/catalog/${props.slug}`}>
+            <Link to={`/catalog/${props.product.bookId}`}>
+
                 <div className="product-card__image">
                     <img src={props.product.imageLink} alt="" />
-                    {/* <img src={props.img02} alt="" /> */}
                 </div>
+
                 <h3 className="product-card__name">{props.product.title}</h3>
+
                 <div className="product-card__price">
                     {numberWithCommas(props.product.price)}
-                    {/* <span className="product-card__price__old">
-                        <del>{numberWithCommas(399000)}</del>
-                    </span> */}
                 </div>
+
             </Link>
+
             <div className="product-card__btn">
                 <Button
                     size="sm"

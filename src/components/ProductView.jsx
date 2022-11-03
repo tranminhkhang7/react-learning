@@ -20,22 +20,22 @@ const ProductView = props => {
     if (product === undefined) product = {
         title: "",
         price: '',
-        image01: null,
-        image02: null,
+        imageLink: null,
+        // image02: null,
         categorySlug: "",
-        colors: [],
+        // colors: [],
         slug: "",
-        size: [],
+        // size: [],
         description: ""
     }
 
-    const [previewImg, setPreviewImg] = useState(product.image01)
+    const [previewImg, setPreviewImg] = useState(product.imageLink)
 
     const [descriptionExpand, setDescriptionExpand] = useState(false)
 
-    const [color, setColor] = useState(undefined)
+    // const [color, setColor] = useState(undefined)
 
-    const [size, setSize] = useState(undefined)
+    // const [size, setSize] = useState(undefined)
 
     const [quantity, setQuantity] = useState(1)
 
@@ -50,76 +50,77 @@ const ProductView = props => {
     useEffect(() => {
         setPreviewImg(product.image01)
         setQuantity(1)
-        setColor(undefined)
-        setSize(undefined)
+        // setColor(undefined)
+        // setSize(undefined)
     }, [product])
 
-    const check = () => {
-        if (color === undefined) {
-            alert('Vui lòng chọn màu sắc!')
-            return false
-        }
+    // const check = () => {
+    //     if (color === undefined) {
+    //         alert('Vui lòng chọn màu sắc!')
+    //         return false
+    //     }
 
-        if (size === undefined) {
-            alert('Vui lòng chọn kích cỡ!')
-            return false
-        }
+    //     if (size === undefined) {
+    //         alert('Vui lòng chọn kích cỡ!')
+    //         return false
+    //     }
 
-        return true
-    }
+    //     return true
+    // }
 
-    const addToCart = () => {
-        if (check()) {
-            let newItem = {
-                slug: product.slug,
-                color: color,
-                size: size,
-                price: product.price,
-                quantity: quantity
-            }
-            if (dispatch(addItem(newItem))) {
-                alert('Success')
-            } else {
-                alert('Fail')
-            }
-        }
-    }
+    // const addToCart = () => {
+    //     if (check()) {
+    //         let newItem = {
+    //             slug: product.slug,
+    //             color: color,
+    //             size: size,
+    //             price: product.price,
+    //             quantity: quantity
+    //         }
+    //         if (dispatch(addItem(newItem))) {
+    //             alert('Success')
+    //         } else {
+    //             alert('Fail')
+    //         }
+    //     }
+    // }
 
-    const goToCart = () => {
-        if (check()) {
-            let newItem = {
-                slug: product.slug,
-                color: color,
-                size: size,
-                price: product.price,
-                quantity: quantity
-            }
-            if (dispatch(addItem(newItem))) {
-                dispatch(remove())
-                props.history.push('/cart')
-            } else {
-                alert('Fail')
-            }
-        }
-    }
+    // const goToCart = () => {
+    //     if (check()) {
+    //         let newItem = {
+    //             slug: product.slug,
+    //             color: color,
+    //             size: size,
+    //             price: product.price,
+    //             quantity: quantity
+    //         }
+    //         if (dispatch(addItem(newItem))) {
+    //             dispatch(remove())
+    //             props.history.push('/cart')
+    //         } else {
+    //             alert('Fail')
+    //         }
+    //     }
+    // }
 
     return (
         <div className="product">
             <div className="product__images">
                 <div className="product__images__list">
-                    <div className="product__images__list__item" onClick={() => setPreviewImg(product.image01)}>
-                        <img src={product.image01} alt="" />
-                    </div>
-                    <div className="product__images__list__item" onClick={() => setPreviewImg(product.image02)}>
-                        <img src={product.image02} alt="" />
-                    </div>
+                    {/* <div className="product__images__list__item" onClick={() => setPreviewImg(product.imageLink)}>
+                        <img src={product.imageLink} alt="" />
+                    </div> */}
+                    {/* <div className="product__images__list__item" onClick={() => setPreviewImg(product.imageLink)}>
+                        <img src={product.imageLink} alt="" />
+                    </div> */}
                 </div>
                 <div className="product__images__main">
-                    <img src={previewImg} alt="" />
+                    <img src={product.imageLink} alt="" />
                 </div>
+
                 <div className={`product-description ${descriptionExpand ? 'expand' : ''}`}>
                     <div className="product-description__title">
-                        Chi tiết sản phẩm
+                        Product detail
                     </div>
                     <div className="product-description__content" dangerouslySetInnerHTML={{__html: product.description}}></div>
                     <div className="product-description__toggle">
@@ -130,15 +131,18 @@ const ProductView = props => {
                         </Button>
                     </div>
                 </div>
+
             </div>
             <div className="product__info">
                 <h1 className="product__info__title">{product.title}</h1>
+
                 <div className="product__info__item">
                     <span className="product__info__item__price">
                         {numberWithCommas(product.price)}
                     </span>
                 </div>
-                <div className="product__info__item">
+
+                {/* <div className="product__info__item">
                     <div className="product__info__item__title">
                         Màu sắc
                     </div>
@@ -152,13 +156,14 @@ const ProductView = props => {
                         }
                     </div>
                 </div>
+
                 <div className="product__info__item">
                     <div className="product__info__item__title">
                         Kích cỡ
                     </div>
                     <div className="product__info__item__list">
                         {
-                            product.size.map((item, index) => (
+                            product && product.size > 0 && product.size.map((item, index) => (
                                 <div key={index} className={`product__info__item__list__item ${size === item ? 'active' : ''}`} onClick={() => setSize(item)}>
                                     <span className="product__info__item__list__item__size">
                                         {item}
@@ -167,27 +172,34 @@ const ProductView = props => {
                             ))
                         }
                     </div>
-                </div>
+                </div> */}
+
                 <div className="product__info__item">
                     <div className="product__info__item__title">
-                        Số lượng
+                        Quantity
                     </div>
+
                     <div className="product__info__item__quantity">
                         <div className="product__info__item__quantity__btn" onClick={() => updateQuantity('minus')}>
                             <i className="bx bx-minus"></i>
                         </div>
+
                         <div className="product__info__item__quantity__input">
                             {quantity}
                         </div>
+
                         <div className="product__info__item__quantity__btn" onClick={() => updateQuantity('plus')}>
                             <i className="bx bx-plus"></i>
                         </div>
                     </div>
+
                 </div>
+
                 <div className="product__info__item">
-                    <Button onClick={() => addToCart()}>thêm vào giỏ</Button>
-                    <Button onClick={() => goToCart()}>mua ngay</Button>
+                    {/* <Button onClick={() => addToCart()}>add to cart</Button>
+                    <Button onClick={() => goToCart()}>buy now</Button> */}
                 </div>
+
             </div>
             <div className={`product-description mobile ${descriptionExpand ? 'expand' : ''}`}>
                 <div className="product-description__title">

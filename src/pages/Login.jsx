@@ -6,6 +6,7 @@ import "../sass/login.css";
 const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [alert, setAlert] = useState("");
 
   // const navigate = useNavigate();
   const history = useHistory();
@@ -19,6 +20,7 @@ const Login = () => {
           window.location.reload();
         },
         (error) => {
+          setAlert("✖ Wrong email or password");
           console.log(error);
         }
       );
@@ -60,6 +62,10 @@ const Login = () => {
             <button type="submit" className="Auth-form-button">
               Log in
             </button>
+          </div>
+
+          <div style={{color: "red"}}>
+            {alert}
           </div>
         </div>
       </form>

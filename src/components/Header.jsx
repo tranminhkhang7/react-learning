@@ -5,22 +5,22 @@ import logo from '../assets/images/books-corner-high-resolution-logo-color-on-tr
 
 const mainNav = [
     {
-        display: "Trang chủ",
+        display: "Home",
         path: "/"
     },
     {
-        display: "Sản phẩm",
+        display: "Books",
         path: "/catalog"
     }
-    ,
-    {
-        display: "Phụ kiện",
-        path: "/accessories"
-    },
-    {
-        display: "Liên hệ",
-        path: "/contact"
-    }
+    // ,
+    // {
+    //     display: "Phụ kiện",
+    //     path: "/accessories"
+    // },
+    // {
+    //     display: "Liên hệ",
+    //     path: "/contact"
+    // }
 ]
 
 const Header = () => {
