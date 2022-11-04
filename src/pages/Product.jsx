@@ -62,11 +62,11 @@ const Product = props => {
 
     // const relatedProducts = productData.getProducts(8)
 
-    React.useEffect(() => {
-        console.log("thererrr");
-        // window.scrollTo(0, 0);
-        loadProductDetail();
-    }, [])
+    // useEffect(() => {
+    //     console.log("thererrr");
+    //     // window.scrollTo(0, 0);
+    //     loadProductDetail();
+    // }, [])
 
     return (
         // <Helmet title={product?.title ?? ''}>
@@ -104,7 +104,7 @@ const Product = props => {
                                             // className="form-control mt-1"
                                             className="Comment-form-input"
                                             type="textarea"
-                                            placeholder="This section is only available to logged-in users."
+                                            placeholder="This section is only available for logged in users."
                                             name="text"
                                             value={content}
                                             onChange={(e) => setContent(e.target.value)}
@@ -112,23 +112,45 @@ const Product = props => {
                                     }
                                 </div>
 
-                                <div className="rate">
-                                    <input type="radio" id="star5" name="rate" value="5"
+                                {authService.isLoggedIn() ?
+                                    <div className="rate">
+                                        <input type="radio" id="star5" name="rate" value="5"
                                             onClick={(e) => setRating(e.target.value)} />
-                                    <label for="star5" title="text">5 stars</label>
-                                    <input type="radio" id="star4" name="rate" value="4"
+                                        <label for="star5" title="text">5 stars</label>
+                                        <input type="radio" id="star4" name="rate" value="4"
                                             onClick={(e) => setRating(e.target.value)} />
-                                    <label for="star4" title="text">4 stars</label>
-                                    <input type="radio" id="star3" name="rate" value="3"
+                                        <label for="star4" title="text">4 stars</label>
+                                        <input type="radio" id="star3" name="rate" value="3"
                                             onClick={(e) => setRating(e.target.value)} />
-                                    <label for="star3" title="text">3 stars</label>
-                                    <input type="radio" id="star2" name="rate" value="2"
+                                        <label for="star3" title="text">3 stars</label>
+                                        <input type="radio" id="star2" name="rate" value="2"
                                             onClick={(e) => setRating(e.target.value)} />
-                                    <label for="star2" title="text">2 stars</label>
-                                    <input type="radio" id="star1" name="rate" value="1"
+                                        <label for="star2" title="text">2 stars</label>
+                                        <input type="radio" id="star1" name="rate" value="1"
                                             onClick={(e) => setRating(e.target.value)} />
-                                    <label for="star1" title="text">1 star</label>
-                                </div>
+                                        <label for="star1" title="text">1 star</label>
+                                    </div>
+                                    :
+                                    <div className="rate">
+                                        <input disabled type="radio" id="star5" name="rate" value="5"
+                                            onClick={(e) => setRating(e.target.value)} />
+                                        <label for="star5" title="text">5 stars</label>
+                                        <input disabled type="radio" id="star4" name="rate" value="4"
+                                            onClick={(e) => setRating(e.target.value)} />
+                                        <label for="star4" title="text">4 stars</label>
+                                        <input disabled type="radio" id="star3" name="rate" value="3"
+                                            onClick={(e) => setRating(e.target.value)} />
+                                        <label for="star3" title="text">3 stars</label>
+                                        <input disabled type="radio" id="star2" name="rate" value="2"
+                                            onClick={(e) => setRating(e.target.value)} />
+                                        <label for="star2" title="text">2 stars</label>
+                                        <input disabled type="radio" id="star1" name="rate" value="1"
+                                            onClick={(e) => setRating(e.target.value)} />
+                                        <label for="star1" title="text">1 star</label>
+                                    </div>
+                                }
+
+
 
                                 <div>
                                     {authService.isLoggedIn() ?

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import Stars from 'react-stars-display'
 
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 
@@ -53,6 +55,8 @@ const ProductView = props => {
         // setColor(undefined)
         // setSize(undefined)
     }, [product])
+
+    console.log(product.genreList);
 
     // const check = () => {
     //     if (color === undefined) {
@@ -122,11 +126,11 @@ const ProductView = props => {
                     <div className="product-description__title">
                         Product detail
                     </div>
-                    <div className="product-description__content" dangerouslySetInnerHTML={{__html: product.description}}></div>
+                    <div className="product-description__content" dangerouslySetInnerHTML={{ __html: product.description }}></div>
                     <div className="product-description__toggle">
                         <Button size="sm" onClick={() => setDescriptionExpand(!descriptionExpand)}>
                             {
-                                descriptionExpand ? 'Thu gọn' : 'Xem thêm'
+                                descriptionExpand ? 'See less' : 'See more'
                             }
                         </Button>
                     </div>
@@ -135,7 +139,19 @@ const ProductView = props => {
             </div>
             <div className="product__info">
                 <h1 className="product__info__title">{product.title}</h1>
+                {/* <h1>{product.averageRating}</h1> */}
+                <Stars
+                    stars={product.averageRating}
+                    size={30}
+                />
+                {/* {product.genreList[1]} */}
 
+                {/* {
+                    product.genreList.map((item, index) => (
+                        <Link key={`Genre-${index}`} to={`/genre/${item.genreId}`}>kk</Link>
+                    ))
+                } */}
+                <Link to={`/genre/3`}>this is a genre</Link>                    
                 <div className="product__info__item">
                     <span className="product__info__item__price">
                         {numberWithCommas(product.price)}
@@ -203,13 +219,13 @@ const ProductView = props => {
             </div>
             <div className={`product-description mobile ${descriptionExpand ? 'expand' : ''}`}>
                 <div className="product-description__title">
-                    Chi tiết sản phẩm
+                    Product detail
                 </div>
-                <div className="product-description__content" dangerouslySetInnerHTML={{__html: product.description}}></div>
+                <div className="product-description__content" dangerouslySetInnerHTML={{ __html: product.description }}></div>
                 <div className="product-description__toggle">
                     <Button size="sm" onClick={() => setDescriptionExpand(!descriptionExpand)}>
                         {
-                            descriptionExpand ? 'Thu gọn' : 'Xem thêm'
+                            descriptionExpand ? 'See less' : 'See more'
                         }
                     </Button>
                 </div>

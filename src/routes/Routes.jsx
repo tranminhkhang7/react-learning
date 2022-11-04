@@ -8,6 +8,7 @@ import Cart from '../pages/Cart'
 import Product from '../pages/Product'
 import Login from '../pages/Login'
 import SignUp from '../pages/SignUp'
+import Genre from '../pages/Genre'
 
 const Routes = () => {
     return (
@@ -18,6 +19,7 @@ const Routes = () => {
             <Route path='/cart' component={Cart}/>
             <Route path='/signup' component={SignUp} />
             <Route path='/login' component={Login} />
+            <Route path='/genre/:id' component={Genre} />
 
 
 

@@ -64,7 +64,7 @@ const Login = () => {
             </button>
           </div>
 
-          <div style={{color: "red"}}>
+          <div style={{color: "red", marginBottom: "15px", marginTop: "5px"}}>
             {alert}
           </div>
 
