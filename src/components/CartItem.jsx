@@ -42,12 +42,17 @@ const CartItem = props => {
     return (
         <div className="cart__item" ref={itemRef}>
             <div className="cart__item__image">
-                <img src={item.product.image01} alt="" />
+                {/* <img src={item.product.image01} alt="" /> */}
+                {/* <img src={item.product.imageLink} alt="" /> */}
+                <img src={item.imageLink} alt="" />
             </div>
             <div className="cart__item__info">
                 <div className="cart__item__info__name">
-                    <Link to={`/catalog/${item.slug}`}>
+                    {/* <Link to={`/catalog/${item.slug}`}>
                         {`${item.product.title} - ${item.color} - ${item.size}`}
+                    </Link> */}
+                    <Link to={`/catalog/${item.bookId}`}>
+                        {item.title}
                     </Link>
                 </div>
                 <div className="cart__item__info__price">

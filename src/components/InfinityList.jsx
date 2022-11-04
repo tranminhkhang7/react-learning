@@ -68,7 +68,7 @@ const InfinityList = props => {
                 smCol={1}
                 gap={20}>
                 {
-                    data.map((item, index) => (
+                    data && data.map((item, index) => (
                         <ProductCard
                             product={item}
                             key={`Product-${index}`}

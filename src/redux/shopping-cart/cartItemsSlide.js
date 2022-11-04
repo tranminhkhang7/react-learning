@@ -12,15 +12,28 @@ export const cartItemsSlice = createSlice({
     reducers: {
         addItem: (state, action) => {
             const newItem = action.payload
-            const duplicate = state.value.filter(e => e.slug === newItem.slug && e.color === newItem.color && e.size === newItem.size)
+            // console.log(newItem.bookId + "this is newItem");
+            // const duplicate = state.value.filter(e => e.slug === newItem.slug && e.color === newItem.color && e.size === newItem.size)
+            const duplicate = state.value.filter(e => e.bookId === newItem.bookId)
+            console.log(duplicate.length + "this is duplicate");
             if (duplicate.length > 0) {
-                state.value = state.value.filter(e => e.slug !== newItem.slug || e.color !== newItem.color || e.size !== newItem.size)
+                // state.value = state.value.filter(e => e.slug !== newItem.slug || e.color !== newItem.color || e.size !== newItem.size)
+                state.value = state.value.filter(e => e.bookId !== newItem.bookId)
                 state.value = [...state.value, {
+                    // id: duplicate[0].id,
+                    // slug: newItem.slug,
+                    // color: newItem.color,
+                    // size: newItem.size,
+                    // price: newItem.price,
+                    // quantity: newItem.quantity + duplicate[0].quantity
+                    
                     id: duplicate[0].id,
-                    slug: newItem.slug,
-                    color: newItem.color,
-                    size: newItem.size,
+                    bookId: newItem.bookId,
+                    // color: newItem.color,
+                    // size: newItem.size,
                     price: newItem.price,
+                    imageLink: newItem.imageLink,
+                    title: newItem.title,
                     quantity: newItem.quantity + duplicate[0].quantity
                 }]
             } else {
@@ -33,15 +46,26 @@ export const cartItemsSlice = createSlice({
         },
         updateItem: (state, action) => {
             const newItem = action.payload
-            const item = state.value.filter(e => e.slug === newItem.slug && e.color === newItem.color && e.size === newItem.size)
+            // const item = state.value.filter(e => e.slug === newItem.slug && e.color === newItem.color && e.size === newItem.size)
+            const item = state.value.filter(e => e.bookId === newItem.bookId)
             if (item.length > 0) {
-                state.value = state.value.filter(e => e.slug !== newItem.slug || e.color !== newItem.color || e.size !== newItem.size)
+                // state.value = state.value.filter(e => e.slug !== newItem.slug || e.color !== newItem.color || e.size !== newItem.size)
+                state.value = state.value.filter(e => e.bookId !== newItem.bookId)
                 state.value = [...state.value, {
+                    // id: item[0].id,
+                    // slug: newItem.slug,
+                    // color: newItem.color,
+                    // size: newItem.size,
+                    // price: newItem.price,
+                    // quantity: newItem.quantity
+
                     id: item[0].id,
-                    slug: newItem.slug,
-                    color: newItem.color,
-                    size: newItem.size,
+                    bookId: newItem.bookId,
+                    // color: newItem.color,
+                    // size: newItem.size,
                     price: newItem.price,
+                    imageLink: newItem.imageLink,
+                    title: newItem.title,
                     quantity: newItem.quantity
                 }]
             }
@@ -49,7 +73,8 @@ export const cartItemsSlice = createSlice({
         },
         removeItem: (state, action) => {
             const item = action.payload
-            state.value = state.value.filter(e => e.slug !== item.slug || e.color !== item.color || e.size !== item.size)
+            // state.value = state.value.filter(e => e.slug !== item.slug || e.color !== item.color || e.size !== item.size)
+            state.value = state.value.filter(e => e.bookId !== item.bookId)        
             localStorage.setItem('cartItems', JSON.stringify(state.value.sort((a, b) => a.id > b.id ? 1 : (a.id < b.id ? -1 : 0))))
         },
     },

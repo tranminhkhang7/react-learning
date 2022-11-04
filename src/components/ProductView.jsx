@@ -58,54 +58,60 @@ const ProductView = props => {
 
     console.log(product.genreList);
 
-    // const check = () => {
-    //     if (color === undefined) {
-    //         alert('Vui lòng chọn màu sắc!')
-    //         return false
-    //     }
+    const check = () => {
+        // if (color === undefined) {
+        //     alert('Vui lòng chọn màu sắc!')
+        //     return false
+        // }
 
-    //     if (size === undefined) {
-    //         alert('Vui lòng chọn kích cỡ!')
-    //         return false
-    //     }
+        // if (size === undefined) {
+        //     alert('Vui lòng chọn kích cỡ!')
+        //     return false
+        // }
 
-    //     return true
-    // }
+        return true
+    }
 
-    // const addToCart = () => {
-    //     if (check()) {
-    //         let newItem = {
-    //             slug: product.slug,
-    //             color: color,
-    //             size: size,
-    //             price: product.price,
-    //             quantity: quantity
-    //         }
-    //         if (dispatch(addItem(newItem))) {
-    //             alert('Success')
-    //         } else {
-    //             alert('Fail')
-    //         }
-    //     }
-    // }
+    const addToCart = () => {
+        if (check()) {
+            let newItem = {
+                // slug: product.slug,
+                bookId: product.bookId,
+                title: product.title,
+                imageLink: product.imageLink,
+                // color: color,
+                // size: size,
+                price: product.price,
+                quantity: quantity
+            }
+            if (dispatch(addItem(newItem))) {
+                alert('Successfully add to cart')
+            } else {
+                alert('Fail to add to cart')
+            }
+        }
+    }
 
-    // const goToCart = () => {
-    //     if (check()) {
-    //         let newItem = {
-    //             slug: product.slug,
-    //             color: color,
-    //             size: size,
-    //             price: product.price,
-    //             quantity: quantity
-    //         }
-    //         if (dispatch(addItem(newItem))) {
-    //             dispatch(remove())
-    //             props.history.push('/cart')
-    //         } else {
-    //             alert('Fail')
-    //         }
-    //     }
-    // }
+    const goToCart = () => {
+        if (check()) {
+            let newItem = {
+                // slug: product.slug,
+                bookId: product.bookId,
+                title: product.title,
+                imageLink: product.imageLink,
+                // color: color,
+                // size: size,
+                price: product.price,
+                quantity: quantity
+            }
+            if (dispatch(addItem(newItem))) {
+                dispatch(remove())
+                props.history.push('/cart')
+            } else {
+                alert('Fail to add to cart')
+            }
+        }
+    }
 
     return (
         <div className="product">
@@ -212,10 +218,9 @@ const ProductView = props => {
                 </div>
 
                 <div className="product__info__item">
-                    {/* <Button onClick={() => addToCart()}>add to cart</Button>
-                    <Button onClick={() => goToCart()}>buy now</Button> */}
+                    <Button onClick={() => addToCart()}>add to cart</Button>
+                    <Button onClick={() => goToCart()}>buy now</Button>
                 </div>
-
             </div>
             <div className={`product-description mobile ${descriptionExpand ? 'expand' : ''}`}>
                 <div className="product-description__title">
