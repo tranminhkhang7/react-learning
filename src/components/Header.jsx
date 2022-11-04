@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useRef, useEffect, useState } from 'react'
+import { Link, useLocation, useHistory } from 'react-router-dom'
+import authService from '../services/auth.service'
 
 import logo from '../assets/images/books-corner-high-resolution-logo-color-on-transparent-background.png'
+import { set } from '../redux/product-modal/productModalSlice'
 
 const mainNav = [
     {
@@ -30,6 +32,25 @@ const Header = () => {
 
     const headerRef = useRef(null)
 
+    const history = useHistory();
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        try {
+            await authService.logout().then(
+                () => {
+                    history.push('/');
+                    window.location.reload();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         window.addEventListener("scroll", () => {
             if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
@@ -39,9 +60,16 @@ const Header = () => {
             }
         })
         return () => {
-            window.removeEventListener("scroll")
+            window.removeEventListener("scroll", null)
         };
     }, []);
+
+    // const [loginStatus, setLoginStatus] = useState(authService.isLoggedIn());
+
+    // useEffect(() => {
+    //     setLoginStatus(authService.isLoggedIn());
+    //     window.location.reload();
+    // }, [loginStatus])
 
     const menuLeft = useRef(null)
 
@@ -54,7 +82,7 @@ const Header = () => {
                     <Link to="/">
                         <img src={logo} alt="" />
                     </Link>
-                </div> 
+                </div>
                 <div className="header__menu">
                     <div className="header__menu__mobile-toggle" onClick={menuToggle}>
                         <i className='bx bx-menu-alt-left'></i>
@@ -86,9 +114,24 @@ const Header = () => {
                                 <i className="bx bx-shopping-bag"></i>
                             </Link>
                         </div>
-                        <div className="header__menu__item header__menu__right__item">
-                            <i className="bx bx-user"></i>
-                        </div>
+
+                        {authService.isLoggedIn() ?
+
+                            <div className="header__menu__item header__menu__right__item">
+                                <Link to='' onClike={handleLogout}>
+                                    <i className='bx bx-log-out' onClick={handleLogout}></i>
+                                </Link>
+                            </div>
+
+                            :
+
+                            <div className="header__menu__item header__menu__right__item">
+                                <Link to='/login'>
+                                    <i className='bx bx-log-in'></i>
+                                </Link>
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>

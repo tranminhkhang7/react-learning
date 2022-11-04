@@ -2,61 +2,77 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080";
 
-const signup = (username, password) => {
-  return axios
-    .post(API_URL + "/signup", {
-      username,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
+const signup = async (name, email, password, gender, dob) => {
+  // const response = await axios
+  //   .post(API_URL + "/account", {
+  //     username,
+  //     password,
+  //   });
 
-      return response.data;
-    });
+  const response = await axios({
+    method: 'post',
+    url: API_URL + "/account",
+    data: {
+      "email": email,
+      "password": password,
+      "name": name,
+      "gender": gender,
+      "birthday": dob
+    }
+  });
+
+  // if (response.data.accessToken) {
+  //   localStorage.setItem("user", JSON.stringify(response.data));
+  // }
+  // return response.data;
+  if (response.data) return response.data;
 };
 
 
 
-const login = (username, password) => {
+const login = async (username, password) => {
   const params = new URLSearchParams();
   params.append('username', username);
   params.append('password', password);
 
-  return axios
-    .post(API_URL + "/login", params)
-    .then((response) => {
-      // console.log("hello");
-      // console.log(response.data.access_token);
-      console.log(response);
-      if (response.data.access_token) {
-        localStorage.setItem("access_token", JSON.stringify(response.data.access_token));
-      }
-      if (response.data.user_id) {
-        localStorage.setItem("user_id", JSON.stringify(response.data.user_id));
-      }
-      if (response.data.user_name) {
-        localStorage.setItem("user_name", JSON.stringify(response.data.user_name));
-      }
-
-      return response.data;
-    }) // no catch any error here
+  const response = await axios
+    .post(API_URL + "/login", params);
+  // console.log("hello");
+  // console.log(response.data.access_token);
+  console.log(response);
+  if (response.data.access_token) {
+    localStorage.setItem("access_token", JSON.stringify(response.data.access_token));
+  }
+  if (response.data.user_id) {
+    localStorage.setItem("user_id", JSON.stringify(response.data.user_id));
+  }
+  if (response.data.user_name) {
+    localStorage.setItem("user_name", JSON.stringify(response.data.user_name));
+  }
+  return response.data; // no catch any error here
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("user_name");
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  return JSON.parse(localStorage.getItem("access_token"));
 };
+
+const isLoggedIn = () => {
+  if (localStorage.getItem("access_token")) return true;
+  return false;
+}
 
 const authService = {
   signup,
   login,
   logout,
   getCurrentUser,
+  isLoggedIn
 };
 
 export default authService;

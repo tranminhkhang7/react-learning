@@ -30,7 +30,7 @@ const CommentProduct = (props) => {
                     <div key={`Comment-${index}`}>
                         <div className='Comment-form'>
                             <div className="Comment-form-content">
-                                <b>{item.customerName}</b> <i>&nbsp;&nbsp;has commented at {item.timestamp}</i>
+                                <b>{item.customerName}</b> <i>&nbsp;&nbsp;has commented at {item.timestamp} with {item.rating}★</i>
                             </div>
                             <div className="Comment-form-content">
                                 {item.content}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import AuthService from "../services/auth.service";
+import { useHistory, Link } from "react-router-dom";
+import authService from "../services/auth.service";
 import "../sass/login.css";
 
 const Login = () => {
@@ -14,7 +14,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await AuthService.login(username, password).then(
+      await authService.login(username, password).then(
         () => {
           history.push('/');
           window.location.reload();
@@ -67,6 +67,8 @@ const Login = () => {
           <div style={{color: "red"}}>
             {alert}
           </div>
+
+          You have not got any account yet? <Link to="/signup" style={{textDecoration: "underline"}}>Sign up</Link>
         </div>
       </form>
     </div>

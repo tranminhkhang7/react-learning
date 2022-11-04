@@ -12,7 +12,7 @@ const API_URL = "http://localhost:8080";
 //   }
 // }
 
-async function addComment(content, bookId) {
+async function addComment(content, rating, bookId) {
   try {
     const response = await axios({
       method: 'post',
@@ -20,6 +20,7 @@ async function addComment(content, bookId) {
       data: {
         "timestamp": (Date.now()).toString(),
         "content": content,
+        "rating": rating,
         "customerId": localStorage.getItem('user_id'),
         "bookId": bookId
       }

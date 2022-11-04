@@ -45,12 +45,12 @@
   
   .Comment-form-button {
     position: relative;
-    left: 1055px;
+    right: -1055px;
 
     padding: 8px 15px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline;
     /* font-size: 16px; */
     margin: 15px 2px;
     transition-duration: 0.4s;
@@ -64,13 +64,13 @@
   
   .Comment-form-button:hover {
     position: relative;
-    left: 1055px; 
+    right: -1055px; 
     /* modify this */
 
     padding: 8px 15px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline;
     /* font-size: 16px; */
     margin: 15px 2px;
     transition-duration: 0.4s;
