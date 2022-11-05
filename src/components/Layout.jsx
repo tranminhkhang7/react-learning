@@ -3,8 +3,11 @@ import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import Header from './Header'
+import HeaderAdmin from './admin/HeaderAdmin'
+
 import Footer from './Footer'
 import ProductViewModal from './ProductViewModal'
+import authService from '../services/auth.service'
 
 import Routes from '../routes/Routes'
 
@@ -13,16 +16,20 @@ const Layout = () => {
         <BrowserRouter>
             <Route render={props => (
                 <div>
-                    <Header {...props}/>
+                    {authService.isLoggedIn() ?
+                        < HeaderAdmin {...props} />
+                        :
+                        <Header {...props} />
+                    }
                     <div className="container">
                         <div className="main">
-                            <Routes/>
+                            <Routes />
                         </div>
                     </div>
-                    <Footer/>
-                    <ProductViewModal/>
+                    <Footer />
+                    <ProductViewModal />
                 </div>
-            )}/>
+            )} />
         </BrowserRouter>
     )
 }

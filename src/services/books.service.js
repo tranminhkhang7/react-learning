@@ -33,9 +33,26 @@ async function getBookDetail(id) {
   }
 }
 
+async function getAllBooksAdmin() {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: API_URL + "/book/admin",
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      }
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const BooksService = {
   getAllBooks,
-  getBookDetail
+  getBookDetail,
+  getAllBooksAdmin
 };
 
 export default BooksService;

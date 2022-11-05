@@ -39,21 +39,24 @@ const Cart = () => {
                         </div>
                     </div>
                     <div className="cart__info__btn">
-                        <Button size="block">
-                            next <i class='bx bx-chevron-right'></i>
-                        </Button>
-                        <Link to="/catalog">
+                        <Link to="/order">
                             <Button size="block">
-                            <i class='bx bx-chevron-left'></i> Return shopping
+                                next <i class='bx bx-chevron-right'></i>
                             </Button>
                         </Link>
-                        
+                        {/* <br></br><br></br> */}
+                        <Link to="/catalog">
+                            <Button size="block">
+                                <i class='bx bx-chevron-left'></i> Return shopping
+                            </Button>
+                        </Link>
+
                     </div>
                 </div>
                 <div className="cart__list">
                     {
                         cartProducts.map((item, index) => (
-                            <CartItem item={item} key={index}/>
+                            <CartItem item={item} key={index} />
                         ))
                     }
                 </div>

@@ -41,13 +41,16 @@ const login = async (username, password) => {
   // console.log(response.data.access_token);
   console.log(response);
   if (response.data.access_token) {
-    localStorage.setItem("access_token", JSON.stringify(response.data.access_token));
+    localStorage.setItem("access_token", response.data.access_token);
   }
   if (response.data.user_id) {
     localStorage.setItem("user_id", JSON.stringify(response.data.user_id));
   }
   if (response.data.user_name) {
     localStorage.setItem("user_name", JSON.stringify(response.data.user_name));
+  }
+  if (response.data.role) {
+    localStorage.setItem("role", JSON.stringify(response.data.role));
   }
   return response.data; // no catch any error here
 };
@@ -56,6 +59,7 @@ const logout = () => {
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_id");
   localStorage.removeItem("user_name");
+  localStorage.removeItem("role");
 };
 
 const getCurrentUser = () => {
@@ -67,12 +71,18 @@ const isLoggedIn = () => {
   return false;
 }
 
+const checkRole = () => {
+  if (localStorage.getItem("role")) return localStorage.getItem("role");
+  return null;
+}
+
 const authService = {
   signup,
   login,
   logout,
   getCurrentUser,
-  isLoggedIn
+  isLoggedIn,
+  checkRole
 };
 
 export default authService;
