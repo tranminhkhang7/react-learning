@@ -76,11 +76,57 @@ async function addNewBook(title, author, publisher, price, imageLink, descriptio
   }
 }
 
+async function editBook(bookId, title, author, publisher, price, imageLink, description, quantityLeft) {
+  try {
+    const response = await axios({
+      method: 'put',
+      url: API_URL + "/book/admin",
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      },
+      data: {
+        "bookId": bookId,
+        "title": title,
+        "author": author,
+        "status": "active",
+        "publisher": publisher,
+        "price": price,
+        "imageLink": imageLink,
+        "description": description,
+        "quantityLeft": quantityLeft,
+        "bookGenres": [1, 2, 3]
+      }
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function deleteBook(bookId) {
+  try {
+    const response = await axios({
+      method: 'delete',
+      url: API_URL + "/book/admin/" + bookId,
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      }
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const BooksService = {
   getAllBooks,
   getBookDetail,
   getAllBooksAdmin,
-  addNewBook
+  addNewBook,
+  editBook,
+  deleteBook
 };
 
 export default BooksService;

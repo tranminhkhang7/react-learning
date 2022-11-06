@@ -1,12 +1,12 @@
 import React, { useCallback, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Redirect } from 'react-router';
 
 import Helmet from '../../components/Helmet'
 import authService from '../../services/auth.service'
 import '../../sass/table.css'
 import BooksService from '../../services/books.service';
-import { Button } from '@material-ui/core';
+import { Button, colors } from '@material-ui/core';
 
 // import HeroSlider from '../components/HeroSlider'
 // import Section, { SectionTitle, SectionBody } from '../components/Section'
@@ -36,10 +36,39 @@ const BookManagementAdmin = () => {
     })
 
     useEffect(() => {
-        console.log("hello");
         loadProduct()
     }, [])
 
+
+    const history = useHistory();
+    const handleDelete = async (bookId) => {
+        // console.log(bookId);
+        try {
+
+            await BooksService.deleteBook(bookId).then(
+                () => {
+                    window.alert("Successfully deleted.")
+                    // history.push('/catalog/' + id);
+                    window.location.reload();
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+    function deletePopup(bookId) {
+        let text = "Deleting this book means setting the book's status to disabled.\nDo you want to continue?";
+        if (window.confirm(text) == true) {
+            handleDelete(bookId);
+        } else {
+            console.log("Cancel");
+        }
+    }
 
     // if (authService.checkRole() !== "\"ADMIN\"") {
     //     return <Redirect to='/' />;
@@ -72,14 +101,25 @@ const BookManagementAdmin = () => {
                         <td>{item.status}</td>
                         <td>
                             <Link to={`/bookmanagement/edit/${item.bookId}`}>
-                            <button>Edit</button>
-                            {/* {item.title} */}
+                                <button>Edit</button>
+                                {/* {item.title} */}
                             </Link>
                         </td>
                         <td>
-                            <Link to=''>
-                                <button>Delete</button>
-                            </Link>
+                            {item.status === 'active'
+                                ?
+                                <button style={{backgroundColor: "#c0392b", color: "#ecf0f1"}} onClick={(e) => {
+                                    deletePopup(item.bookId);
+                                }}>
+                                    Disable
+                                </button>
+                                :
+                                <button style={{backgroundColor: "#27ae60", color: "#ecf0f1"}} onClick={(e) => {
+                                    deletePopup(item.bookId);
+                                }}>
+                                    Active
+                                </button>
+                            }
                         </td>
                     </tr>
                 ))

@@ -7,38 +7,19 @@ import GenresService from "../../services/genre.service";
 const EditBook = props => {
     const id = props.match.params.id;
 
-    console.log(id + "hello id edit");
+    const [bookDetail, setBookDetail] = useState({});
 
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [publisher, setPublisher] = useState("");
-    const [price, setPrice] = useState(0);
-    const [imageLink, setImageLink] = useState("");
-    const [description, setDescription] = useState("");
-    const [quantityLeft, setQuantityLeft] = useState(0);
-
-    // const navigate = useNavigate();
-    const history = useHistory();
-
-    const handleAddBook = async (e) => {
-        e && e.preventDefault();
-        try {
-            await BooksService.addNewBook(title, author, publisher, price,
-                imageLink, description, quantityLeft).then(
-                    () => {
-                        history.push('/');
-                        window.location.reload();
-                    },
-                    (error) => {
-                        // setAlert("✖ Wrong email or password");
-                        console.log(error);
-                    }
-                );
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
+    const loadProductDetail = useCallback(() => {
+        BooksService.getBookDetail(id)
+            .then(function (response) {
+                console.log(response.data);
+                setBookDetail(response.data);
+            })
+            .catch(function (error) {
+                console.log(error.message);
+                return null;
+            });
+    }, [id])
 
     const [genres, setGenres] = useState([]);
 
@@ -54,13 +35,54 @@ const EditBook = props => {
             });
     })
 
+    const [title, setTitle] = useState(bookDetail.title);
+    const [author, setAuthor] = useState();
+    const [publisher, setPublisher] = useState();
+    const [price, setPrice] = useState();
+    const [imageLink, setImageLink] = useState();
+    const [description, setDescription] = useState();
+    const [quantityLeft, setQuantityLeft] = useState();
+
     useEffect(() => {
-        loadGenre()
-    }, [])
+        
+        loadGenre();
+        loadProductDetail();
+        // setTitle(bookDetail.title);
+        // setAuthor(bookDetail.author);
+    }, [id])
+
+    // loadProductDetail();
+
+    
+
+    // const navigate = useNavigate();
+    const history = useHistory();
+
+    const handleEditBook = async (e) => {
+        e && e.preventDefault();
+        try {
+            await BooksService.editBook(id, title, author, publisher, price,
+                imageLink, description, quantityLeft).then(
+                    () => {
+                        history.push('/bookmanagement');
+                        // window.location.reload();
+                    },
+                    (error) => {
+                        // setAlert("✖ Wrong email or password");
+                        console.log(error);
+                    }
+                );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+    
 
     return (
         <div className="Book-form-container">
-            <form className="Book-form" onSubmit={handleAddBook}>
+            <form className="Book-form" onSubmit={handleEditBook}>
                 <div className="Book-form-content">
                     <h3 className="Book-form-title">Edit the book</h3>
 
@@ -69,8 +91,9 @@ const EditBook = props => {
                         <input
                             className="Book-form-input"
                             type="text"
-                            placeholder="Enter the title"
-                            value={title}
+                            // placeholder={bookDetail.title}
+                            defaultValue={bookDetail.title}
+                            // value={bookDetail.title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
@@ -80,8 +103,9 @@ const EditBook = props => {
                         <input
                             className="Book-form-input"
                             type="text"
-                            placeholder="Enter the author"
-                            value={author}
+                            // placeholder={bookDetail.author}
+                            defaultValue={bookDetail.author}
+                            // value={author}
                             onChange={(e) => setAuthor(e.target.value)}
                         />
                     </div>
@@ -91,8 +115,9 @@ const EditBook = props => {
                         <input
                             className="Book-form-input"
                             type="text"
-                            placeholder="Enter the publichser"
-                            value={publisher}
+                            // placeholder={bookDetail.publisher}
+                            defaultValue={bookDetail.publisher}
+                            // value={publisher}
                             onChange={(e) => setPublisher(e.target.value)}
                         />
                     </div>
@@ -102,8 +127,9 @@ const EditBook = props => {
                         <input
                             className="Book-form-input"
                             type="text"
-                            placeholder="Enter the price"
-                            value={price}
+                            // placeholder={bookDetail.price}
+                            defaultValue={bookDetail.price}
+                            // value={price}
                             onChange={(e) => setPrice(e.target.value)}
                         />
                     </div>
@@ -113,8 +139,9 @@ const EditBook = props => {
                         <input
                             className="Book-form-input"
                             type="text"
-                            placeholder=""
-                            value={imageLink}
+                            // placeholder={bookDetail.imageLink}
+                            defaultValue={bookDetail.imageLink}
+                            // value={imageLink}
                             onChange={(e) => setImageLink(e.target.value)}
                         />
                     </div>
@@ -124,8 +151,9 @@ const EditBook = props => {
                         <textarea
                             className="Book-form-input"
                             type="text"
-                            placeholder="Enter the description"
-                            value={description}
+                            // placeholder={bookDetail.description}
+                            defaultValue={bookDetail.description}
+                            // value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </div>
@@ -135,8 +163,9 @@ const EditBook = props => {
                         <input
                             className="Book-form-input"
                             type="text"
-                            placeholder="Enter the quantity"
-                            value={quantityLeft}
+                            // placeholder={bookDetail.quantityLeft}
+                            defaultValue={bookDetail.quantityLeft}
+                            // value={quantityLeft}
                             onChange={(e) => setQuantityLeft(e.target.value)}
                         />
                     </div>
