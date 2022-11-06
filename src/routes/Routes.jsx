@@ -12,6 +12,7 @@ import SignUp from '../pages/SignUp'
 import Genre from '../pages/Genre'
 import BookManagementAdmin from '../pages/admin/BookManagementAdmin'
 import AddNewBook from '../pages/admin/AddNewBook'
+import EditBook from '../pages/admin/EditBook'
 
 const Routes = () => {
     return (
@@ -27,6 +28,7 @@ const Routes = () => {
 
             <Route path='/bookmanagement' exact component={BookManagementAdmin} />
             <Route exact path='/bookmanagement/add' component={AddNewBook} />
+            <Route exact path='/bookmanagement/edit/:id' component={EditBook} />
 
 
 

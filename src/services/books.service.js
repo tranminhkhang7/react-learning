@@ -49,10 +49,38 @@ async function getAllBooksAdmin() {
   }
 }
 
+async function addNewBook(title, author, publisher, price, imageLink, description, quantityLeft) {
+  try {
+    const response = await axios({
+      method: 'post',
+      url: API_URL + "/book/admin",
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      },
+      data: {
+        "title": title,
+        "author": author,
+        "status": "active",
+        "publisher": publisher,
+        "price": price,
+        "imageLink": imageLink,
+        "description": description,
+        "quantityLeft": quantityLeft,
+        "bookGenres": [1, 2, 3]
+      }
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const BooksService = {
   getAllBooks,
   getBookDetail,
-  getAllBooksAdmin
+  getAllBooksAdmin,
+  addNewBook
 };
 
 export default BooksService;

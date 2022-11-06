@@ -36,6 +36,7 @@ const BookManagementAdmin = () => {
     })
 
     useEffect(() => {
+        console.log("hello");
         loadProduct()
     }, [])
 
@@ -69,8 +70,17 @@ const BookManagementAdmin = () => {
                         <td>{item.price}</td>
                         <td>{item.quantityLeft}</td>
                         <td>{item.status}</td>
-                        {/* <td>{item.title}</td>
-                        <td>{item.title}</td> */}
+                        <td>
+                            <Link to={`/bookmanagement/edit/${item.bookId}`}>
+                            <button>Edit</button>
+                            {/* {item.title} */}
+                            </Link>
+                        </td>
+                        <td>
+                            <Link to=''>
+                                <button>Delete</button>
+                            </Link>
+                        </td>
                     </tr>
                 ))
                 }

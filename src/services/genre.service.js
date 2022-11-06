@@ -23,8 +23,19 @@ async function getAllBooksByGenreId(genreId) {
   }
 }
 
+async function getAllGenres() {
+  try {
+    const response = await axios.get(API_URL + "/genre");
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const GenresService = {
     getAllBooksByGenreId,
+    getAllGenres
 };
 
 export default GenresService;

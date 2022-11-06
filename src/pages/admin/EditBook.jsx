@@ -4,7 +4,11 @@ import "../../sass/bookmanagement.css";
 import BooksService from "../../services/books.service";
 import GenresService from "../../services/genre.service";
 
-const AddNewBook = () => {
+const EditBook = props => {
+    const id = props.match.params.id;
+
+    console.log(id + "hello id edit");
+
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [publisher, setPublisher] = useState("");
@@ -54,12 +58,11 @@ const AddNewBook = () => {
         loadGenre()
     }, [])
 
-
     return (
         <div className="Book-form-container">
             <form className="Book-form" onSubmit={handleAddBook}>
                 <div className="Book-form-content">
-                    <h3 className="Book-form-title">Add a new book</h3>
+                    <h3 className="Book-form-title">Edit the book</h3>
 
                     <div>
                         <label>Title</label>
@@ -158,8 +161,9 @@ const AddNewBook = () => {
                 </div>
             </form>
         </div>
+
     );
 };
 
-export default AddNewBook;
+export default EditBook;
 

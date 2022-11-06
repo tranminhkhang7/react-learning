@@ -12,10 +12,10 @@ const mainNav = [
     },
     {
         display: "Books",
-        path: "/catalog"
+        path: "/bookmanagement"
     },
     {
-        display: "Genre",
+        display: "Genres",
         path: "/catalog"
     }
     // ,
@@ -55,18 +55,18 @@ const HeaderAdmin = () => {
         }
     };
 
-    useEffect(() => {
-        window.addEventListener("scroll", () => {
-            if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-                headerRef.current.classList.add('shrink')
-            } else {
-                headerRef.current.classList.remove('shrink')
-            }
-        })
-        return () => {
-            window.removeEventListener("scroll", null)
-        };
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener("scroll", () => {
+    //         if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    //             headerRef.current.classList.add('shrink')
+    //         } else {
+    //             headerRef.current.classList.remove('shrink')
+    //         }
+    //     })
+    //     return () => {
+    //         window.removeEventListener("scroll", null)
+    //     };
+    // }, []);
 
     // const [loginStatus, setLoginStatus] = useState(authService.isLoggedIn());
 
@@ -109,7 +109,7 @@ const HeaderAdmin = () => {
                             ))
                         }
                     </div>
-                    <div className="header__menu__right">
+                    {/* <div className="header__menu__right">
                         <div className="header__menu__item header__menu__right__item">
                             <i className="bx bx-search"></i>
                         </div>
@@ -136,7 +136,7 @@ const HeaderAdmin = () => {
                             </div>
                         }
 
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
