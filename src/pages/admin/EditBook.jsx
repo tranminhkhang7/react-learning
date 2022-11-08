@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "../../sass/bookmanagement.css";
 import BooksService from "../../services/books.service";
@@ -35,13 +35,21 @@ const EditBook = props => {
             });
     })
 
-    const [title, setTitle] = useState(bookDetail.title);
-    const [author, setAuthor] = useState();
-    const [publisher, setPublisher] = useState();
-    const [price, setPrice] = useState();
-    const [imageLink, setImageLink] = useState();
-    const [description, setDescription] = useState();
-    const [quantityLeft, setQuantityLeft] = useState();
+    // const [title, setTitle] = useState();
+    // const [author, setAuthor] = useState();
+    // const [publisher, setPublisher] = useState();
+    // const [price, setPrice] = useState();
+    // const [imageLink, setImageLink] = useState();
+    // const [description, setDescription] = useState();
+    // const [quantityLeft, setQuantityLeft] = useState();
+
+    const title = useRef();
+    const author = useRef();
+    const publisher = useRef();
+    const price = useRef();
+    const imageLink = useRef();
+    const description = useRef();
+    const quantityLeft = useRef();
 
     useEffect(() => {
         
@@ -60,11 +68,22 @@ const EditBook = props => {
 
     const handleEditBook = async (e) => {
         e && e.preventDefault();
-        // setTitle(bookDetail.title);
-        console.log("title n", title);
+        // setTitle("title goc", bookDetail.title);
+        // console.log("title goc", bookDetail.title)
+        // console.log("title n", title.current);
+
+        if (title.current === undefined) title.current = bookDetail.title;
+        if (author.current === undefined) author.current = bookDetail.author;
+        if (publisher.current === undefined) publisher.current = bookDetail.publisher;
+        if (price.current === undefined) price.current = bookDetail.price;
+        if (imageLink.current === undefined) imageLink.current = bookDetail.imageLink;
+        if (description.current === undefined) description.current = bookDetail.description;
+        if (quantityLeft.current === undefined) quantityLeft.current = bookDetail.quantityLeft;
+
         try {
-            await BooksService.editBook(id, title, author, publisher, price,
-                imageLink, description, quantityLeft).then(
+            await BooksService.editBook(id, title.current, author.current, 
+                publisher.current, price.current,
+                imageLink.current, description.current, quantityLeft.current).then(
                     () => {
                         history.push('/bookmanagement');
                         // window.location.reload();
@@ -79,9 +98,6 @@ const EditBook = props => {
         }
     };
 
-
-    
-
     return (
         <div className="Book-form-container">
             <form className="Book-form" onSubmit={handleEditBook}>
@@ -94,10 +110,10 @@ const EditBook = props => {
                             className="Book-form-input"
                             type="text"
                             // placeholder={bookDetail.title}
-                            // defaultValue={bookDetail.title}
-                            value={bookDetail.title}
-                            onChange={(e) => setTitle(bookDetail.title)}
-                            // onSubmit={(e) => setTitle(bookDetail.title)}
+                            defaultValue={bookDetail.title}
+                            // value={title}
+                            // onChange={(e) => setTitle(e.target.value)}
+                            onChange={(e) => title.current = e.target.value}
                         />
                     </div>
 
@@ -109,7 +125,8 @@ const EditBook = props => {
                             // placeholder={bookDetail.author}
                             defaultValue={bookDetail.author}
                             // value={author}
-                            onChange={(e) => setAuthor(e.target.value)}
+                            // onChange={(e) => setAuthor(e.target.value)}
+                            onChange={(e) => author.current = e.target.value}
                         />
                     </div>
 
@@ -121,7 +138,8 @@ const EditBook = props => {
                             // placeholder={bookDetail.publisher}
                             defaultValue={bookDetail.publisher}
                             // value={publisher}
-                            onChange={(e) => setPublisher(e.target.value)}
+                            // onChange={(e) => setPublisher(e.target.value)}
+                            onChange={(e) => publisher.current = e.target.value}
                         />
                     </div>
 
@@ -133,7 +151,8 @@ const EditBook = props => {
                             // placeholder={bookDetail.price}
                             defaultValue={bookDetail.price}
                             // value={price}
-                            onChange={(e) => setPrice(e.target.value)}
+                            // onChange={(e) => setPrice(e.target.value)}
+                            onChange={(e) => price.current = e.target.value}
                         />
                     </div>
 
@@ -145,7 +164,8 @@ const EditBook = props => {
                             // placeholder={bookDetail.imageLink}
                             defaultValue={bookDetail.imageLink}
                             // value={imageLink}
-                            onChange={(e) => setImageLink(e.target.value)}
+                            // onChange={(e) => setImageLink(e.target.value)}
+                            onChange={(e) => imageLink.current = e.target.value}
                         />
                     </div>
 
@@ -157,7 +177,8 @@ const EditBook = props => {
                             // placeholder={bookDetail.description}
                             defaultValue={bookDetail.description}
                             // value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            // onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => description.current = e.target.value}
                         />
                     </div>
 
@@ -169,7 +190,8 @@ const EditBook = props => {
                             // placeholder={bookDetail.quantityLeft}
                             defaultValue={bookDetail.quantityLeft}
                             // value={quantityLeft}
-                            onChange={(e) => setQuantityLeft(e.target.value)}
+                            // onChange={(e) => setQuantityLeft(e.target.value)}
+                            onChange={(e) => quantityLeft.current = e.target.value}
                         />
                     </div>
 
