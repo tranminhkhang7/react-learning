@@ -9,7 +9,7 @@ const EditBook = props => {
 
     const [bookDetail, setBookDetail] = useState({});
 
-    const loadProductDetail = useCallback(() => {
+    const loadProductDetail = () => {
         BooksService.getBookDetail(id)
             .then(function (response) {
                 console.log(response.data);
@@ -19,7 +19,7 @@ const EditBook = props => {
                 console.log(error.message);
                 return null;
             });
-    }, [id])
+    }
 
     const [genres, setGenres] = useState([]);
 
@@ -60,6 +60,8 @@ const EditBook = props => {
 
     const handleEditBook = async (e) => {
         e && e.preventDefault();
+        // setTitle(bookDetail.title);
+        console.log("title n", title);
         try {
             await BooksService.editBook(id, title, author, publisher, price,
                 imageLink, description, quantityLeft).then(
@@ -92,9 +94,10 @@ const EditBook = props => {
                             className="Book-form-input"
                             type="text"
                             // placeholder={bookDetail.title}
-                            defaultValue={bookDetail.title}
-                            // value={bookDetail.title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            // defaultValue={bookDetail.title}
+                            value={bookDetail.title}
+                            onChange={(e) => setTitle(bookDetail.title)}
+                            // onSubmit={(e) => setTitle(bookDetail.title)}
                         />
                     </div>
 

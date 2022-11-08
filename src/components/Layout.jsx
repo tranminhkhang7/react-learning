@@ -16,7 +16,7 @@ const Layout = () => {
         <BrowserRouter>
             <Route render={props => (
                 <div>
-                    {authService.isLoggedIn() ?
+                    {authService.checkRole() === "\"ADMIN\"" ?
                         < HeaderAdmin {...props} />
                         :
                         <Header {...props} />

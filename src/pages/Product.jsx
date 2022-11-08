@@ -56,7 +56,7 @@ const Product = props => {
     };
 
     useEffect(() => {
-        console.log("here");
+        // console.log("here");
         loadProductDetail();
     }, [id])
 
@@ -71,7 +71,7 @@ const Product = props => {
     return (
         // <Helmet title={product?.title ?? ''}>
         // <Helmet title={product.title}>
-        <Helmet>
+        <Helmet title={product?.title}>
             <Section>
                 <SectionBody>
                     <ProductView product={product} />

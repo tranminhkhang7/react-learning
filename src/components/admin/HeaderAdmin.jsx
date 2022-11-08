@@ -8,7 +8,7 @@ import { set } from '../../redux/product-modal/productModalSlice'
 const mainNav = [
     {
         display: "Customers",
-        path: "/"
+        path: "/customermanagement"
     },
     {
         display: "Books",
@@ -16,7 +16,7 @@ const mainNav = [
     },
     {
         display: "Genres",
-        path: "/catalog"
+        path: "/genremanagement"
     }
     // ,
     // {
@@ -43,7 +43,7 @@ const HeaderAdmin = () => {
         try {
             await authService.logout().then(
                 () => {
-                    history.push('/');
+                    history.push('/login');
                     window.location.reload();
                 },
                 (error) => {
@@ -109,15 +109,15 @@ const HeaderAdmin = () => {
                             ))
                         }
                     </div>
-                    {/* <div className="header__menu__right">
-                        <div className="header__menu__item header__menu__right__item">
+                    <div className="header__menu__right">
+                        {/* <div className="header__menu__item header__menu__right__item">
                             <i className="bx bx-search"></i>
                         </div>
                         <div className="header__menu__item header__menu__right__item">
                             <Link to="/cart">
                                 <i className="bx bx-shopping-bag"></i>
                             </Link>
-                        </div>
+                        </div> */}
 
                         {authService.isLoggedIn() ?
 
@@ -136,7 +136,7 @@ const HeaderAdmin = () => {
                             </div>
                         }
 
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </div>

@@ -23,9 +23,9 @@ async function getAllBooks() {
   }
 }
 
-async function getBookDetail(id) {
+ function getBookDetail(id) {
   try {
-    const response = await axios.get(API_URL + "/book/" + id);
+    const response =  axios.get(API_URL + "/book/" + id);
     console.log(response);
     return response;
   } catch (error) {
@@ -33,14 +33,27 @@ async function getBookDetail(id) {
   }
 }
 
-async function getAllBooksAdmin() {
+async function getAllBooksAdmin(page, size) {
   try {
     const response = await axios({
       method: 'get',
-      url: API_URL + "/book/admin",
+      url: API_URL + "/book/admin?page=" + page + "&size=" + size,
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       }
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function getTotalNumber() {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: API_URL + "/book/totalnumber",
     });
     console.log(response);
     return response;
@@ -124,6 +137,7 @@ const BooksService = {
   getAllBooks,
   getBookDetail,
   getAllBooksAdmin,
+  getTotalNumber,
   addNewBook,
   editBook,
   deleteBook

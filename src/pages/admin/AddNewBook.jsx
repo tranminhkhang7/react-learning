@@ -1,38 +1,101 @@
 import React, { useState, useEffect, useCallback } from "react";
+import storage from '../../firebase';
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL
+} from "firebase/storage";
+
 import { useHistory, Link } from "react-router-dom";
 import "../../sass/bookmanagement.css";
 import BooksService from "../../services/books.service";
 import GenresService from "../../services/genre.service";
+import { v4 } from "uuid";
 
 const AddNewBook = () => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [publisher, setPublisher] = useState("");
     const [price, setPrice] = useState(0);
-    const [imageLink, setImageLink] = useState("");
+    // const [imageLink, setImageLink] = useState("");
     const [description, setDescription] = useState("");
     const [quantityLeft, setQuantityLeft] = useState(0);
+
+    const [imageFile, setImageFile] = useState();
 
     // const navigate = useNavigate();
     const history = useHistory();
 
+    // const handleAddBook = async (e) => {
+
+    //     e && e.preventDefault();
+
+    //     let imageLink = "abcd";
+
+    //     const imageRef = ref(storage, `images/${imageFile.name + v4()}`);
+    //     uploadBytes(imageRef, imageFile).then((snapshot) => {
+    //         getDownloadURL(snapshot.ref).then((url) => {
+    //             console.log("image ne", url);
+    //             // setImageLink(url);
+    //             imageLink = url;
+    //             // console.log("image222", imageLink);
+    //         });
+    //     });
+
+    //     // console.log("reach add book handler", imageLink, "hehe");
+
+    //     try {
+    //         await BooksService.addNewBook(title, author, publisher, price,
+    //             imageLink, description, quantityLeft).then(
+    //                 () => {
+    //                     history.push('/bookmanagement');
+    //                     // window.location.reload();
+    //                 },
+    //                 (error) => {
+    //                     // setAlert("✖ Wrong email or password");
+    //                     console.log(error);
+    //                 }
+    //             );
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
+
     const handleAddBook = async (e) => {
+
         e && e.preventDefault();
-        try {
-            await BooksService.addNewBook(title, author, publisher, price,
-                imageLink, description, quantityLeft).then(
-                    () => {
-                        history.push('/');
-                        window.location.reload();
-                    },
-                    (error) => {
-                        // setAlert("✖ Wrong email or password");
-                        console.log(error);
-                    }
-                );
-        } catch (err) {
-            console.log(err);
-        }
+
+        let imageLink = "abcd";
+
+        const imageRef = ref(storage, `images/${imageFile.name + v4()}`);
+        await uploadBytes(imageRef, imageFile).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                console.log("image ne", url);
+                // setImageLink(url);
+                imageLink = url;
+                // console.log("image222", imageLink);
+
+                try {
+                    BooksService.addNewBook(title, author, publisher, price,
+                        imageLink, description, quantityLeft).then(
+                            () => {
+                                history.push('/bookmanagement');
+                                // window.location.reload();
+                            },
+                            (error) => {
+                                // setAlert("✖ Wrong email or password");
+                                console.log(error);
+                            }
+                        );
+                } catch (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        // console.log("reach add book handler", imageLink, "hehe");
+
+
     };
 
 
@@ -41,7 +104,7 @@ const AddNewBook = () => {
     const loadGenre = useCallback(() => {
         GenresService.getAllGenres()
             .then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 setGenres(response.data);
             })
             .catch(function (error) {
@@ -51,7 +114,10 @@ const AddNewBook = () => {
     })
 
     useEffect(() => {
-        loadGenre()
+        loadGenre();
+        // return () => {
+        //     setImageFile();
+        // }
     }, [])
 
 
@@ -109,10 +175,10 @@ const AddNewBook = () => {
                         <label>Image</label>
                         <input
                             className="Book-form-input"
-                            type="text"
+                            type="file"
                             placeholder=""
-                            value={imageLink}
-                            onChange={(e) => setImageLink(e.target.value)}
+                            // value={imageFile}
+                            onChange={(e) => setImageFile(e.target.files[0])}
                         />
                     </div>
 

@@ -56,7 +56,7 @@ const ProductView = props => {
         // setSize(undefined)
     }, [product])
 
-    console.log(product.genreList);
+    // console.log(product.genreList);
 
     const check = () => {
         // if (color === undefined) {

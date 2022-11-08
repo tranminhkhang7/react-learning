@@ -1,0 +1,82 @@
+.App {
+    background-color: white;
+  }
+  
+  .Genre-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 100vw; */
+    margin-top: 60px;
+    height: 60vh;
+  }
+  
+  .Genre-form {
+    width: 5000px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .Genre-form-content {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  
+  .Genre-form-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-size: 24px;
+    color: rgb(34, 34, 34);
+    font-weight: 800;
+  }
+  
+  .Genre-form-input {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+  
+  .Genre-form-button {
+    position: relative;
+    justify-content: center;
+  
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* font-size: 16px; */
+    margin: 15px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 2px;
+  
+    background-color: white;
+    color: black;
+    border: 1px solid #555555;
+  }
+  
+  .Genre-form-button:hover {
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* font-size: 16px; */
+    margin: 15px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 2px;
+  
+    background-color: #000000;
+    color: white;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(34, 34, 34);
+  }

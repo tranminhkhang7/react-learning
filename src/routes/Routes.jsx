@@ -10,9 +10,13 @@ import Product from '../pages/Product'
 import Login from '../pages/Login'
 import SignUp from '../pages/SignUp'
 import Genre from '../pages/Genre'
+
 import BookManagementAdmin from '../pages/admin/BookManagementAdmin'
 import AddNewBook from '../pages/admin/AddNewBook'
 import EditBook from '../pages/admin/EditBook'
+import CustomerManagement from '../pages/admin/CustomerManagement'
+import GenreManagement from '../pages/admin/GenreManagement'
+import AddNewGenre from '../pages/admin/AddNewGenre'
 
 const Routes = () => {
     return (
@@ -29,7 +33,9 @@ const Routes = () => {
             <Route path='/bookmanagement' exact component={BookManagementAdmin} />
             <Route exact path='/bookmanagement/add' component={AddNewBook} />
             <Route exact path='/bookmanagement/edit/:id' component={EditBook} />
-
+            <Route exact path='/customermanagement' component={CustomerManagement} />
+            <Route exact path='/genremanagement' component={GenreManagement} />
+            <Route exact path='/genremanagement/add' component={AddNewGenre} />
 
 
         </Switch>
