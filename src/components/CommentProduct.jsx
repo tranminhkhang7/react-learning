@@ -19,7 +19,7 @@ const CommentProduct = (props) => {
     }, [props.id])
 
     useEffect(() => {
-        console.log("here comment");
+        // console.log("here comment");
         loadCommentProduct();
     }, [])
 

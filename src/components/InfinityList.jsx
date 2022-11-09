@@ -31,17 +31,16 @@ const InfinityList = props => {
         setIndex(1)
     }, [props.data])
 
-    useEffect(() => {
-        window.addEventListener("scroll", () => {
-            if (listRef && listRef.current) {
-                if (window.scrollY + window.innerHeight >= listRef.current.clientHeight + listRef.current.offsetTop + 200) {
-                    console.log("bottom reach")
-                    setLoad(true)
-                }
-            }
+    // useEffect(() => {
+    //     window.addEventListener("scroll", () => {
+    //         if (listRef && listRef.current) {
+    //             if (window.scrollY + window.innerHeight >= listRef.current.clientHeight + listRef.current.offsetTop + 200) {
+    //                 setLoad(true)
+    //             }
+    //         }
 
-        })
-    }, [listRef])
+    //     })
+    // }, [listRef])
 
     useEffect(() => {
         const getItems = () => {

@@ -33,7 +33,7 @@ const ProductCard = props => {
 
             </Link>
 
-            <div className="product-card__btn">
+            {/* <div className="product-card__btn">
                 <Button
                     size="sm"
                     icon="bx bx-cart"
@@ -41,7 +41,7 @@ const ProductCard = props => {
                     onClick={() => dispatch(set(props.slug))}>
                     buy now
                 </Button>
-            </div>
+            </div> */}
         </div>
     )
 }

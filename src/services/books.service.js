@@ -37,7 +37,7 @@ async function getAllBooksAdmin(page, size) {
   try {
     const response = await axios({
       method: 'get',
-      url: API_URL + "/book/admin?page=" + page + "&size=" + size,
+      url: API_URL + "/book/allbooks?page=" + page + "&size=" + size,
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       }
@@ -66,7 +66,7 @@ async function addNewBook(title, author, publisher, price, imageLink, descriptio
   try {
     const response = await axios({
       method: 'post',
-      url: API_URL + "/book/admin",
+      url: API_URL + "/book",
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       },
@@ -93,7 +93,7 @@ async function editBook(bookId, title, author, publisher, price, imageLink, desc
   try {
     const response = await axios({
       method: 'put',
-      url: API_URL + "/book/admin",
+      url: API_URL + "/book",
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       },
@@ -121,7 +121,7 @@ async function deleteBook(bookId) {
   try {
     const response = await axios({
       method: 'delete',
-      url: API_URL + "/book/admin/" + bookId,
+      url: API_URL + "/book/" + bookId,
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       }
