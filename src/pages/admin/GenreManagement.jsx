@@ -99,9 +99,9 @@ const GenreManagement = props => {
         }
     }
 
-    // if (authService.checkRole() !== "\"ADMIN\"") {
-    //     return <Redirect to='/' />;
-    // }
+    if (authService.checkRole() !== "\"ADMIN\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <Helmet title="Genre Management">
             <Link to='/genremanagement/add'>

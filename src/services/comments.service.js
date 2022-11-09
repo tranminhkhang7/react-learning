@@ -17,6 +17,9 @@ async function addComment(content, rating, bookId) {
     const response = await axios({
       method: 'post',
       url: API_URL + "/comment",
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      },
       data: {
         "timestamp": (Date.now()).toString(),
         "content": content,

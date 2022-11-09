@@ -98,9 +98,9 @@ const CustomerManagement = props => {
         }
     }
 
-    // if (authService.checkRole() !== "\"ADMIN\"") {
-    //     return <Redirect to='/' />;
-    // }
+    if (authService.checkRole() !== "\"ADMIN\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <Helmet title="Customer Management">
             {/* <Link to='/bookmanagement/add'>

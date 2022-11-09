@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { useHistory, Link } from "react-router-dom";
 import "../sass/order.css";
+import authService from "../services/auth.service";
 import OrderService from "../services/order.service";
 
 const Order = () => {
@@ -39,6 +41,9 @@ const Order = () => {
         }
     }
 
+    if (authService.checkRole() !== "\"CUSTOMER\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <div className="Order-form-container">
             <form className="Order-form" onSubmit={handleOrder}>

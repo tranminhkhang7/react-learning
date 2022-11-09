@@ -98,9 +98,9 @@ const BookManagementAdmin = props => {
         }
     }
 
-    // if (authService.checkRole() !== "\"ADMIN\"") {
-    //     return <Redirect to='/' />;
-    // }
+    if (authService.checkRole() !== "\"ADMIN\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <Helmet title="Book Management">
             <Link to='/bookmanagement/add'>

@@ -8,6 +8,9 @@ async function addNewOrder(phone, address) {
         const response = await axios({
             method: 'post',
             url: API_URL + "/order",
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+            },
             data: {
                 "timestamp": (Date.now()).toString(),
                 "phone": phone,
@@ -17,7 +20,7 @@ async function addNewOrder(phone, address) {
                 // "orderDetail": localStorage.getItem('cart_items')
             }
         });
-        
+
         console.log(response);
         return response;
     }

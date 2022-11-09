@@ -17,6 +17,7 @@ import EditBook from '../pages/admin/EditBook'
 import CustomerManagement from '../pages/admin/CustomerManagement'
 import GenreManagement from '../pages/admin/GenreManagement'
 import AddNewGenre from '../pages/admin/AddNewGenre'
+import Search from '../pages/Search'
 
 const Routes = () => {
     return (
@@ -29,6 +30,7 @@ const Routes = () => {
             <Route path='/signup' component={SignUp} />
             <Route path='/login' component={Login} />
             <Route path='/genre/:id' component={Genre} />
+            <Route path='/search' component={Search} />
 
             <Route path='/bookmanagement' exact component={BookManagementAdmin} />
             <Route exact path='/bookmanagement/add' component={AddNewBook} />

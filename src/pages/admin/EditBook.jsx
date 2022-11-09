@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Redirect } from "react-router-dom";
 import { useHistory, Link } from "react-router-dom";
 import "../../sass/bookmanagement.css";
+import authService from "../../services/auth.service";
 import BooksService from "../../services/books.service";
 import GenresService from "../../services/genre.service";
 
@@ -98,6 +100,9 @@ const EditBook = props => {
         }
     };
 
+    if (authService.checkRole() !== "\"ADMIN\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <div className="Book-form-container">
             <form className="Book-form" onSubmit={handleEditBook}>

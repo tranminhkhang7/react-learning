@@ -11,6 +11,8 @@ import "../../sass/bookmanagement.css";
 import BooksService from "../../services/books.service";
 import GenresService from "../../services/genre.service";
 import { v4 } from "uuid";
+import authService from "../../services/auth.service";
+import { Redirect } from "react-router-dom";
 
 const AddNewBook = () => {
     const [title, setTitle] = useState("");
@@ -83,7 +85,6 @@ const AddNewBook = () => {
                                 // window.location.reload();
                             },
                             (error) => {
-                                // setAlert("✖ Wrong email or password");
                                 console.log(error);
                             }
                         );
@@ -92,9 +93,6 @@ const AddNewBook = () => {
                 }
             });
         });
-
-        // console.log("reach add book handler", imageLink, "hehe");
-
 
     };
 
@@ -121,6 +119,9 @@ const AddNewBook = () => {
     }, [])
 
 
+    if (authService.checkRole() !== "\"ADMIN\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <div className="Book-form-container">
             <form className="Book-form" onSubmit={handleAddBook}>

@@ -32,6 +32,8 @@ const Header = () => {
 
     const headerRef = useRef(null)
 
+    const [searchText, setSearchText] = useState("");
+
     const history = useHistory();
 
     const handleLogout = async (e) => {
@@ -49,6 +51,23 @@ const Header = () => {
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        // try {
+        //     await authService.logout().then(
+        //         () => {
+        history.push('/search?query=' + searchText);
+        //             window.location.reload();
+        //         },
+        //         (error) => {
+        //             console.log(error);
+        //         }
+        //     );
+        // } catch (err) {
+        //     console.log(err);
+        // }
     };
 
     // useEffect(() => {
@@ -107,7 +126,21 @@ const Header = () => {
                     </div>
                     <div className="header__menu__right">
                         <div className="header__menu__item header__menu__right__item">
-                            <i className="bx bx-search"></i>
+                            {/* <i className="bx bx-search"></i> */}
+                            <form onSubmit={handleSearch}>
+                                <input
+                                    type="text"
+                                    placeholder="Search books..."
+                                    className="Auth-form-input-search"
+                                    value={searchText}
+                                    onChange={(e) => { setSearchText(e.target.value); console.log(searchText) }}
+                                />
+                                {/* <div> */}
+                                <button type="submit" className='Auth-form-button-search'>
+                                    <i className="bx bx-search"></i>
+                                </button>
+                                {/* </div> */}
+                            </form>
                         </div>
                         <div className="header__menu__item header__menu__right__item">
                             <Link to="/cart">

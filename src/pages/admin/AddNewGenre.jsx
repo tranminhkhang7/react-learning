@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Redirect } from "react-router-dom";
 import { useHistory, Link } from "react-router-dom";
 import "../../sass/genremanagement.css";
+import authService from "../../services/auth.service";
 import BooksService from "../../services/books.service";
 import GenresService from "../../services/genre.service";
 
@@ -33,6 +35,9 @@ const AddNewGenre = () => {
     // }, [])
 
 
+    if (authService.checkRole() !== "\"ADMIN\"") {
+        return <Redirect to='/' />;
+    }
     return (
         <div className="Genre-form-container">
             <form className="Genre-form" onSubmit={handleAddGenre}>

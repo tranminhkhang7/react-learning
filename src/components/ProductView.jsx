@@ -145,19 +145,23 @@ const ProductView = props => {
             </div>
             <div className="product__info">
                 <h1 className="product__info__title">{product.title}</h1>
-                {/* <h1>{product.averageRating}</h1> */}
                 <Stars
                     stars={product.averageRating}
                     size={30}
                 />
+
+
                 {/* {product.genreList[1]} */}
 
-                {/* {
-                    product.genreList.map((item, index) => (
-                        <Link key={`Genre-${index}`} to={`/genre/${item.genreId}`}>kk</Link>
+                <br></br>
+                <br></br>
+                {
+                    product && product.genreList && product.genreList.map((item, index) => (
+                        <Link key={`Genre-${index}`} to={`/genre/${item.genreId}`}>  {item.genreName}  |</Link>
                     ))
-                } */}
-                <Link to={`/genre/3`}>this is a genre</Link>                    
+                }
+
+                {/* <Link to={`/genre/3`}>this is a genre</Link>                     */}
                 <div className="product__info__item">
                     <span className="product__info__item__price">
                         {numberWithCommas(product.price)}

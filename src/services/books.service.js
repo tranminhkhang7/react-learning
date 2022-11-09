@@ -23,15 +23,25 @@ async function getAllBooks() {
   }
 }
 
- function getBookDetail(id) {
+function getBookDetail(id) {
   try {
-    const response =  axios.get(API_URL + "/book/" + id);
+    const response = axios.get(API_URL + "/book/" + id);
     console.log(response);
     return response;
   } catch (error) {
     console.log(error);
   }
 }
+
+// function getBookDetail(id) {
+//   try {
+//     const response = axios.get(API_URL + "/book/" + id);
+//     console.log(response);
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 async function getAllBooksAdmin(page, size) {
   try {
@@ -54,6 +64,9 @@ async function getTotalNumber() {
     const response = await axios({
       method: 'get',
       url: API_URL + "/book/totalnumber",
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      }
     });
     console.log(response);
     return response;
