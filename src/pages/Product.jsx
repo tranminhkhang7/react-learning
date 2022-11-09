@@ -19,8 +19,8 @@ const Product = props => {
 
     const id = props.match.params.id;
 
-    console.log(id);
-    // const product = productData.getProductBySlug(props.match.params.slug)
+    // console.log(id);
+
     const [product, setProduct] = useState({});
     const [content, setContent] = useState("");
     const [rating, setRating] = useState(1);
@@ -60,17 +60,9 @@ const Product = props => {
         loadProductDetail();
     }, [id])
 
-    // const relatedProducts = productData.getProducts(8)
-
-    // useEffect(() => {
-    //     console.log("thererrr");
-    //     // window.scrollTo(0, 0);
-    //     loadProductDetail();
-    // }, [])
+   
 
     return (
-        // <Helmet title={product?.title ?? ''}>
-        // <Helmet title={product.title}>
         <Helmet title={product?.title}>
             <Section>
                 <SectionBody>
@@ -173,33 +165,6 @@ const Product = props => {
                 </SectionBody>
 
             </Section>
-
-            {/* <Section>
-                <SectionTitle>
-                    Khám phá thêm
-                </SectionTitle>
-                <SectionBody>
-                    <Grid
-                        col={4}
-                        mdCol={2}
-                        smCol={1}
-                        gap={20}
-                    >
-                        {
-                            relatedProducts.map((item, index) => (
-                                <ProductCard
-                                    key={index}
-                                    img01={item.image01}
-                                    img02={item.image02}
-                                    name={item.title}
-                                    price={Number(item.price)}
-                                    slug={item.slug}
-                                />   
-                            ))
-                        }
-                    </Grid>
-                </SectionBody>
-            </Section> */}
         </Helmet>
     )
 }

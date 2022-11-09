@@ -14,15 +14,6 @@ const mainNav = [
         display: "Books",
         path: "/catalog"
     }
-    // ,
-    // {
-    //     display: "Phụ kiện",
-    //     path: "/accessories"
-    // },
-    // {
-    //     display: "Liên hệ",
-    //     path: "/contact"
-    // }
 ]
 
 const Header = () => {

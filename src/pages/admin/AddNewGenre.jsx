@@ -30,11 +30,6 @@ const AddNewGenre = () => {
     };
 
 
-    // useEffect(() => {
-    //     loadGenre()
-    // }, [])
-
-
     if (authService.checkRole() !== "\"ADMIN\"") {
         return <Redirect to='/' />;
     }

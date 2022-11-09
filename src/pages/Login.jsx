@@ -8,7 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
 
-  // const navigate = useNavigate();
   const history = useHistory();
 
   const handleLogin = async (e) => {

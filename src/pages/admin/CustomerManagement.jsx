@@ -6,21 +6,7 @@ import { Redirect } from 'react-router';
 import Helmet from '../../components/Helmet'
 import authService from '../../services/auth.service'
 import '../../sass/table.css'
-import BooksService from '../../services/books.service';
-import { Button, colors } from '@material-ui/core';
 import CustomersService from '../../services/customers.service';
-
-// import HeroSlider from '../components/HeroSlider'
-// import Section, { SectionTitle, SectionBody } from '../components/Section'
-// import PolicyCard from '../components/PolicyCard'
-// import Grid from '../components/Grid'
-// import ProductCard from '../../components/ProductCard'
-
-// import heroSliderData from '../../assets/fake-data/hero-slider'
-// import policy from '../../assets/fake-data/policy'
-// import productData from '../assets/fake-data/products'
-
-// import banner from '../assets/images/banner.png'
 
 const CustomerManagement = props => {
     const value = queryString.parse(props.location.search);
@@ -102,10 +88,7 @@ const CustomerManagement = props => {
         return <Redirect to='/' />;
     }
     return (
-        <Helmet title="Customer Management">
-            {/* <Link to='/bookmanagement/add'>
-                <button className='Comment-form-button'>Add a new book</button>
-            </Link> */}
+        <Helmet title="Customer Management">            
             <h2>Customer Management</h2>
             <table>
                 <tr>

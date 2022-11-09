@@ -25,7 +25,6 @@ const AddNewBook = () => {
 
     const [imageFile, setImageFile] = useState();
 
-    // const navigate = useNavigate();
     const history = useHistory();
 
     // const handleAddBook = async (e) => {
